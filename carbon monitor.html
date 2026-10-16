@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoTrack - Carbon Footprint Monitor</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f1f7f0;
+            color: #263b2b;
+        }
+
+        header {
+            background: #176b45;
+            color: white;
+            padding: 22px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin-bottom: 8px;
+        }
+
+        nav {
+            background: #104d33;
+            padding: 14px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 10px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #b9f6ca;
+        }
+
+        .hero {
+            padding: 35px 20px;
+            text-align: center;
+            background: #d9f0dc;
+        }
+
+        .hero h2 {
+            font-size: 28px;
+            margin-bottom: 12px;
+            color: #176b45;
+        }
+
+        .hero p {
+            margin-bottom: 18px;
+        }
+
+        button {
+            background: #218c58;
+            color: white;
+            border: none;
+            padding: 11px 18px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        button:hover {
+            background: #125b39;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 30px auto;
+        }
+
+        .section-title {
+            margin-bottom: 20px;
+            color: #176b45;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 18px;
+            margin-bottom: 35px;
+        }
+
+        .card {
+            background: white;
+            padding: 22px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px #00000012;
+            border-left: 5px solid #218c58;
+        }
+
+        .card h3 {
+            font-size: 16px;
+            margin-bottom: 12px;
+        }
+
+        .number {
+            font-size: 27px;
+            font-weight: bold;
+            color: #218c58;
+        }
+
+        .calculator {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px #00000012;
+            margin-bottom: 35px;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 7px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 11px;
+            border: 1px solid #cbd8ce;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+
+        .result {
+            background: #e0f5e5;
+            padding: 18px;
+            margin-top: 20px;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .recommendations {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 18px;
+        }
+
+        .tip {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px #00000012;
+        }
+
+        .tip h3 {
+            margin-bottom: 10px;
+            color: #176b45;
+        }
+
+        .tip p {
+            line-height: 1.5;
+        }
+
+        .challenge {
+            background: #d9f0dc;
+            padding: 25px;
+            margin-top: 30px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        footer {
+            background: #104d33;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 600px) {
+            nav a {
+                display: inline-block;
+                margin: 7px;
+            }
+
+            .hero h2 {
+                font-size: 23px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>🌱 EcoTrack</h1>
+    <p>Smart Community Carbon Footprint Monitoring System</p>
+</header>
+
+<nav>
+    <a href="#home">Home</a>
+    <a href="#dashboard">Dashboard</a>
+    <a href="#calculator">Calculator</a>
+    <a href="#community">Community</a>
+    <a href="#tips">Green Tips</a>
+</nav>
+
+<section class="hero" id="home">
+    <h2>Track Your Carbon. Protect Our Planet.</h2>
+    <p>Monitor your carbon footprint and help build a greener community.</p>
+    <button onclick="document.getElementById('calculator').scrollIntoView({behavior:'smooth'})">
+        Calculate My Footprint
+    </button>
+</section>
+
+<div class="container">
+
+    <!-- DASHBOARD -->
+    <section id="dashboard">
+        <h2 class="section-title">📊 Community Dashboard</h2>
+
+        <div class="cards">
+            <div class="card">
+                <h3>🌍 Your Carbon Footprint</h3>
+                <p class="number" id="footprint">0 kg</p>
+                <p>Estimated monthly emissions</p>
+            </div>
+
+            <div class="card">
+                <h3>⚡ Electricity Usage</h3>
+                <p class="number" id="electricity">0 kWh</p>
+                <p>Monthly consumption</p>
+            </div>
+
+            <div class="card">
+                <h3>🌳 Green Points</h3>
+                <p class="number" id="points">0</p>
+                <p>Earn points through green activities</p>
+            </div>
+
+            <div class="card">
+                <h3>🏘️ Community Households</h3>
+                <p class="number">120</p>
+                <p>Illustrative demonstration data</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CALCULATOR -->
+    <section id="calculator">
+        <h2 class="section-title">🧮 Carbon Footprint Calculator</h2>
+
+        <div class="calculator">
+            <p>Enter your monthly household consumption to estimate your carbon emissions.</p>
+
+            <form id="carbonForm">
+
+                <label for="units">Monthly Electricity Consumption (kWh)</label>
+                <input type="number" id="units" min="0" step="any" value="100" required>
+
+                <label for="fuel">Monthly Petrol Consumption (litres)</label>
+                <input type="number" id="fuel" min="0" step="any" value="10" required>
+
+                <label for="travel">Monthly Bus Travel Distance (km)</label>
+                <input type="number" id="travel" min="0" step="any" value="20" required>
+
+                <label for="waste">Household Waste Generated (kg per week)</label>
+                <input type="number" id="waste" min="0" step="any" value="5" required>
+
+                <button type="submit" style="margin-top:20px">
+                    Calculate Carbon Footprint
+                </button>
+            </form>
+
+            <div class="result" id="result" aria-live="polite">
+                <h3>Your Estimated Carbon Footprint</h3>
+                <p id="total"></p>
+                <p id="breakdown"></p>
+                <p id="advice" style="margin-top:12px"></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMMUNITY -->
+    <section id="community">
+        <h2 class="section-title">🏘️ Community Monitoring</h2>
+
+        <div class="cards">
+            <div class="card">
+                <h3>🌱 Community Goal</h3>
+                <p class="number">10%</p>
+                <p>Illustrative target for reducing emissions</p>
+            </div>
+
+            <div class="card">
+                <h3>♻️ Green Activities</h3>
+                <p class="number" id="activities">0</p>
+                <p>Activities recorded on this device</p>
+            </div>
+
+            <div class="card">
+                <h3>🏆 Your Achievement</h3>
+                <p class="number" id="badge">Beginner</p>
+                <p>Your green activity level</p>
+            </div>
+        </div>
+
+        <div class="challenge">
+            <h2>🌳 Weekly Green Challenge</h2>
+            <p style="margin:15px 0">
+                Save electricity, use public transport, or recycle household waste.
+            </p>
+            <button onclick="completeChallenge()">
+                Complete Green Challenge (+10 Points)
+            </button>
+            <p id="challengeMessage" style="margin-top:15px"></p>
+        </div>
+    </section>
+
+    <!-- RECOMMENDATIONS -->
+    <section id="tips" style="margin-top:35px">
+        <h2 class="section-title">💚 Eco-Friendly Recommendations</h2>
+
+        <div class="recommendations">
+            <div class="tip">
+                <h3>⚡ Save Electricity</h3>
+                <p>Switch off unused lights and appliances. Choose energy-efficient equipment.</p>
+            </div>
+
+            <div class="tip">
+                <h3>🚲 Green Transportation</h3>
+                <p>Walk, cycle, carpool, or use public transportation whenever practical.</p>
+            </div>
+
+            <div class="tip">
+                <h3>♻️ Reduce Waste</h3>
+                <p>Separate recyclable waste, reuse materials, and avoid unnecessary packaging.</p>
+            </div>
+
+            <div class="tip">
+                <h3>🌳 Plant Trees</h3>
+                <p>Participate in community tree-planting and tree-maintenance activities.</p>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<footer>
+    <p>🌱 EcoTrack | Smart Community Carbon Footprint Monitoring System</p>
+    <p style="margin-top:8px">Together for a cleaner and greener future.</p>
+</footer>
+
+<script>
+    // Demonstration emission factors.
+    // Replace these with appropriate, documented local factors.
+    const FACTORS = {
+        electricity: 0.70,  // kg CO2e per kWh
+        petrol: 2.31,       // kg CO2e per litre
+        bus: 0.10,          // illustrative kg CO2e per passenger-km
+        waste: 0.15         // illustrative kg CO2e per kg of waste
+    };
+
+    let points = Number(localStorage.getItem("ecoPoints")) || 0;
+    let activities = Number(localStorage.getItem("ecoActivities")) || 0;
+
+    function updateDashboard(total, units) {
+        document.getElementById("footprint").textContent =
+            total.toFixed(2) + " kg";
+
+        document.getElementById("electricity").textContent =
+            units + " kWh";
+
+        document.getElementById("points").textContent = points;
+        document.getElementById("activities").textContent = activities;
+
+        let badge = "Beginner";
+
+        if (points >= 100) {
+            badge = "Eco Champion";
+        } else if (points >= 30) {
+            badge = "Green Starter";
+        }
+
+        document.getElementById("badge").textContent = badge;
+    }
+
+    document.getElementById("carbonForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const units = Number(document.getElementById("units").value);
+        const fuel = Number(document.getElementById("fuel").value);
+        const travel = Number(document.getElementById("travel").value);
+        const waste = Number(document.getElementById("waste").value);
+
+        if (
+            !Number.isFinite(units) || units < 0 ||
+            !Number.isFinite(fuel) || fuel < 0 ||
+            !Number.isFinite(travel) || travel < 0 ||
+            !Number.isFinite(waste) || waste < 0
+        ) {
+            alert("Please enter valid, non-negative values.");
+            return;
+        }
+
+        const electricityEmissions = units * FACTORS.electricity;
+        const fuelEmissions = fuel * FACTORS.petrol;
+        const travelEmissions = travel * FACTORS.bus;
+        const wasteEmissions = waste * 4 * FACTORS.waste;
+
+        const total =
+            electricityEmissions +
+            fuelEmissions +
+            travelEmissions +
+            wasteEmissions;
+
+        document.getElementById("result").style.display = "block";
+
+        document.getElementById("total").innerHTML =
+            "<strong>" + total.toFixed(2) +
+            " kg CO₂e per month (estimated)</strong>";
+
+        document.getElementById("breakdown").innerHTML =
+            "Electricity: " + electricityEmissions.toFixed(2) + " kg CO₂e<br>" +
+            "Petrol: " + fuelEmissions.toFixed(2) + " kg CO₂e<br>" +
+            "Bus travel: " + travelEmissions.toFixed(2) + " kg CO₂e<br>" +
+            "Waste: " + wasteEmissions.toFixed(2) + " kg CO₂e";
+
+        let advice = "Consider saving electricity, reducing waste, and choosing lower-emission transport.";
+
+        if (total > 200) {
+            advice = "Review your electricity, fuel, and transport usage to identify opportunities for reducing emissions.";
+        } else if (total < 50) {
+            advice = "Great start! Continue tracking your consumption and maintaining eco-friendly habits.";
+        }
+
+        document.getElementById("advice").textContent =
+            "Recommendation: " + advice;
+
+        localStorage.setItem("ecoLastTotal", total.toFixed(2));
+        localStorage.setItem("ecoLastUnits", String(units));
+
+        updateDashboard(total, units);
+    });
+
+    function completeChallenge() {
+        points += 10;
+        activities += 1;
+
+        localStorage.setItem("ecoPoints", points);
+        localStorage.setItem("ecoActivities", activities);
+
+        document.getElementById("points").textContent = points;
+        document.getElementById("activities").textContent = activities;
+
+        document.getElementById("challengeMessage").textContent =
+            "Well done! 10 green points added. Total points: " + points;
+
+        let badge = "Beginner";
+
+        if (points >= 100) {
+            badge = "Eco Champion";
+        } else if (points >= 30) {
+            badge = "Green Starter";
+        }
+
+        document.getElementById("badge").textContent = badge;
+    }
+
+    // Restore the latest calculation after refreshing the page.
+    const savedTotal = localStorage.getItem("ecoLastTotal");
+    const savedUnits = localStorage.getItem("ecoLastUnits");
+
+    if (savedTotal !== null && savedUnits !== null) {
+        updateDashboard(Number(savedTotal), Number(savedUnits));
+    } else {
+        updateDashboard(0, 0);
+    }
+</script>
+
+</body>
+</html>
